@@ -1,0 +1,229 @@
+body {
+    text-align: center;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: rgb(240, 240, 240);
+    text-shadow: 0px 0px 1px black;
+    font-family: 'Kumbh Sans', sans-serif;
+}
+
+/* Utility class */
+.border-blue {
+    border: 1px dotted blue;
+}
+
+.instructions {
+    color: #131517;
+    font-size: 2rem;
+}
+
+.card {
+    width: 200px;
+    padding: 20px 20px 100px;
+    border: 1px solid #8954BA;
+    border-left: 5px solid #8954BA;
+    border-right: 5px solid #8954BA;
+    animation: backflip-card;
+    animation-duration: 2s;
+    animation-fill-mode: forwards;
+    /* persist the animation to stop at its final frame */
+    position: relative;
+    /* to take card-back out of flow from the document */
+    background-image: linear-gradient(to bottom right, #68351E, #131517, #27282A, #D39467, #8954BA);
+}
+
+.card:hover {
+    animation: frontflip-card, pop-out-card-back, pop-in-card-back;
+    animation-duration: 2000ms, 500ms, 500ms;
+    animation-delay: 0s, 2000ms, 4500ms;
+    /* first animation starts immediately, second starts after 2s, third starts 4s after that, etc. */
+    animation-direction: alternate;
+    animation-fill-mode: forwards;
+}
+
+@keyframes frontflip-card {
+    0% {
+        transform: 0deg;
+    }
+
+    100% {
+        transform: rotateX(180deg) rotateZ(90deg);
+    }
+}
+
+@keyframes backflip-card {
+    0% {
+        transform: rotateZ(-90deg) rotateX(-180deg);
+    }
+
+    100% {
+        transform: 0deg;
+    }
+}
+
+@keyframes pop-out-card-back {
+    0% {
+        box-shadow: 0px 0px 0px black;
+    }
+
+    100% {
+        translate: -10px -10px;
+        box-shadow: -10px -10px 0px black;
+    }
+}
+
+@keyframes pop-in-card-back {
+    0% {
+        box-shadow: -10px -10px 0px black;
+    }
+
+    100% {
+        translate: 0px 0px;
+        box-shadow: 0px 0px 0px black;
+    }
+}
+
+.card-front {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: make-card-front-visible 2s;
+    animation-fill-mode: forwards;
+}
+
+.card:hover .card-front {
+    animation-name: make-card-front-invisible;
+    animation-duration: 2s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes make-card-front-invisible {
+    from {
+        /* card is frontside up */
+        transform: 0deg;
+    }
+
+    to {
+        /* card is backside up */
+        transform: rotateY(180deg);
+        backface-visibility: hidden;
+    }
+}
+
+@keyframes make-card-front-visible {
+    from {
+        /* card is backside up */
+        transform: rotateZ(-90deg) rotateX(-180deg);
+        backface-visibility: hidden;
+    }
+
+    to {
+        /* card is frontside up */
+        transform: 0deg;
+    }
+}
+
+.card-back {
+    /* when the front of the card is visible */
+    animation-name: make-card-back-invisible;
+    animation-duration: 2s;
+    animation-fill-mode: forwards;
+    /* transform: rotate3d(1, 0, 0, 180deg); */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column-reverse;
+    background-color: rgb(221, 219, 219);
+    box-shadow: 0px 0px 10px whitesmoke;
+    border: 1px solid black;
+}
+
+.card-back>a img {
+    /* when the front of the card is visible */
+    width: 50px;
+    height: 50px;
+    margin: 10px;
+    transform: rotateZ(90deg) rotateY(180deg);
+}
+
+.card:hover .card-back {
+    animation-name: make-card-back-visible;
+    animation-duration: 2s;
+    animation-fill-mode: forwards;
+    margin: auto;
+}
+
+@keyframes make-card-back-invisible {
+    0% {
+        /* card is backside up */
+        transform: translate(-50%, -50%);
+        visibility: visible;
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+        /* to make the backside completely disappear before being frontside up */
+        visibility: hidden;
+    }
+
+    100% {
+        /* card is frontside up */
+        transform: 0deg;
+        visibility: hidden;
+        opacity: 0;
+    }
+}
+
+@keyframes make-card-back-visible {
+    0% {
+        /* card is frontside up */
+        transform: 0deg;
+        visibility: hidden;
+        opacity: 0;
+    }
+
+    50% {
+        /* to make the backside start appearing after the frontside is rotated */
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    100% {
+        /* card is backside up */
+        transform: translate(-50%, -50%);
+        /* center absolutely positioned card-back once card is rotated */
+        visibility: visible;
+        opacity: 1;
+    }
+}
+
+.name {
+    order: 1;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.urvish-img {
+    width: 150px;
+    border-radius: 50%;
+    border: 5px solid #8954BA;
+    box-sizing: border-box;
+    order: 2;
+}
+
+.job-title,
+.residence {
+    order: 3;
+    margin-bottom: 0px;
+    font-size: 1.2rem;
+}
+
+.residence {
+    font-weight: bold;
+}
