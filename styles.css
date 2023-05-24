@@ -38,7 +38,7 @@ body {
 .card:hover {
     animation: frontflip-card, pop-out-card-back, pop-in-card-back;
     animation-duration: 2000ms, 500ms, 500ms;
-    animation-delay: 0s, 2000ms, 4500ms;
+    animation-delay: 0s, 2000ms, 3500ms;
     /* first animation starts immediately, second starts after 2s, third starts 4s after that, etc. */
     animation-direction: alternate;
     animation-fill-mode: forwards;
