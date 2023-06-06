@@ -35,7 +35,7 @@ body {
     background-image: linear-gradient(to bottom right, #68351E, #131517, #27282A, #D39467, #8954BA);
 }
 
-.card:hover {
+.container:hover .card {
     animation: frontflip-card, pop-out-card-back, pop-in-card-back;
     animation-duration: 2000ms, 500ms, 500ms;
     animation-delay: 0s, 2000ms, 3500ms;
@@ -94,7 +94,7 @@ body {
     animation-fill-mode: forwards;
 }
 
-.card:hover .card-front {
+.container:hover .card-front {
     animation-name: make-card-front-invisible;
     animation-duration: 2s;
     animation-fill-mode: forwards;
@@ -151,7 +151,7 @@ body {
     transform: rotateZ(90deg) rotateY(180deg);
 }
 
-.card:hover .card-back {
+.container:hover .card-back {
     animation-name: make-card-back-visible;
     animation-duration: 2s;
     animation-fill-mode: forwards;
